@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'/>
+    <link rel="stylesheet" type = "text/css" href="{% static 'css_style/style.css'%}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Search Results</title>
+</head>
+<body>
+<center>
+    <h1><b><i>Search Results</i></b></h1>
+</center>
+<hr style="height:1px;border:none;color:#333;background-color:#333;">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-offset-2 col-xs-4">
+            <h2><i>Student Details</i></h2>
+            {% if error %}
+                    <span style="color:red;">
+                        No Student Record Found with the this {{id}}.
+                    </span> <br>
+            {% else %}
+                <span>
+                    Student ID: {{id}} <br>
+                    Student Name: {{name}}
+                </span><br>
+                <img src="media/{{image}}" alt="Could Not Load Image" class="img-thumbnail" height="300" width="170">
+                <br>
+            {% endif %}
+        </div>
+        <div class="col-xs-offset-1 col-xs-4">
+            <h2><i>Student's Log</i></h2>
+            <hr>
+            {% for date,list in log.items %}
+                <a class="btn" data-toggle="collapse" data-target="#{{date}}">{{date}}</a>
+                <div id="{{date}}" class="collapse">
+                    <p>In_time_count: {{list|length}}</p>
+                    {% ifequal "Not yet left" list|last|last %}
+                        <p>Out_time_count: {{list|length}}-1</p>
+                    {% else %}
+                        <p>Out_time_count: {{list|length}}</p>
+                    {% endifequal %}
+                    <table class="table table-bordered">
+                            <tr>
+                                <th>No</th>
+                                <th>In_time</th>
+                                <th>Out_time</th>
+                            </tr>
+                            {% for i in list %}
+                                    <tr>
+                                        <td>{{forloop.counter}}</td>
+                                        <td>{{i.0}}</td>
+                                        <td>{{i.1}}</td>
+                                    </tr>
+                            {% endfor %}
+                        </table>
+                </div>
+                <br>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+</body>
+</html>

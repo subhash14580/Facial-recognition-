@@ -1,0 +1,50 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'/>
+<link rel="stylesheet" type = "text/css" href="{% static 'css_style/style.css'%}" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid bg-primary">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="{% url 'index' %}" style="font-family:Times New Roman, Times, serif;color:white;">
+          <span class="glyphicon glyphicon-home"></span>
+          Automated Data Identification and Data Capture
+      </a>
+    </div>
+  </div>
+</nav>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register Student</title>
+</head>
+
+    <body >
+<div class="container">
+    <div class="row">
+        <div class="col-xs-4">
+
+        </div>
+        <form method="post" enctype="multipart/form-data">
+
+
+        <div class = "col-xs-4">
+            <h1><span><b><i>Registration Form</i></b></span></h1><br>
+            <!--<div class="form-group" >-->
+                    {% csrf_token %}
+                    {{ form.as_p }}
+            <center><button type="submit">Submit</button></center>
+
+       </div>
+  </form>
+    </div>
+
+</div>
+
+</body>
+
+</html>
